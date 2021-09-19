@@ -63,7 +63,7 @@ function SideNav() {
       </Toolbar>
       <Divider />
       <List>{mainListItems}</List>
-      <Divider />
+      {/* <Divider /> */}
       {/* <List>{secondaryListItems}</List> */}
     </Drawer>
   );

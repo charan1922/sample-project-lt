@@ -14,7 +14,6 @@ import TransactionSection from "./TransactionSections";
 import ChartsSection from "./ChartsSection";
 import TableSection from "./TableSections";
 import TopButtons from "./topButtons";
-import Leads from "../../features/leads";
 
 function Copyright(props) {
   return (
@@ -93,30 +92,22 @@ function Dashboard() {
       <Grid container spacing={3} className="m-0 row sidenav-info">
         {/* Buttons */}
         <div className="col-md-12 p-0">
-        <TopButtons />
+          <TopButtons />
         </div>
-        
+
         {/* Transactions*/}
         <div className="col-md-12 deposits-container">
-        <TransactionSection />
+          <TransactionSection />
         </div>
-       
+
         {/* Chart */}
-      
+
         <ChartsSection />
-       
-       
+
         {/* Tables */}
-       
+
         <TableSection />
-       
-        
       </Grid>
-      <br/>
-      <Grid>
-      <Leads/>
-      </Grid>
-      <Copyright sx={{ pt: 4 }} />
     </Container>
   );
 }

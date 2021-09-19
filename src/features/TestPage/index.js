@@ -8,13 +8,14 @@ import {
 import { checkAPIStatus } from "../../redux/reducers/ApiStatusCheck";
 
 export default function TestPage() { //to check api status
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); // used to dispatch an action
   const { apiStatus, isLoading, successMsg, errorMsg } = useSelector(
     ({ apiStatusCheck }) => apiStatusCheck
-  );
+  ); //selecter is used to access data from the store 
+  // src\redux\reducers\index.js - check all the reducers in the path
 
   useEffect(() => {
-    dispatch(checkAPIStatus());
+    dispatch(checkAPIStatus()); //Invoke Action
   }, []);
 
   return (

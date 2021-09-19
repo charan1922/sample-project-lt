@@ -29,6 +29,13 @@ export const mainListItems = (
 
     <ListItem button>
       <ListItemIcon>
+        <LayersIcon />
+      </ListItemIcon>
+      <ListItemText primary="Loan Enquiry" />
+    </ListItem>
+
+    <ListItem button>
+      <ListItemIcon>
         <SettingsIcon />
       </ListItemIcon>
       <ListItemText primary="Settings" />

@@ -29,7 +29,7 @@ export default function App() {
       <ProvideAuth>
         <Router>
           <Switch>
-            <Route path="/" component={Dashboard} />
+            <Route path="/" exact component={Dashboard} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/leads" component={Leads} />
             <Route path="/settings" component={Settings} />
