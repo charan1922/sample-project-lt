@@ -88,16 +88,28 @@ function Dashboard() {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Grid container spacing={3}>
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }} className="sidenav-content">
+      <Grid container spacing={3} className="m-0 row sidenav-info">
         {/* Buttons */}
+        <div className="col-md-12 p-0">
         <TopButtons />
+        </div>
+        
         {/* Transactions*/}
+        <div className="col-md-12 deposits-container">
         <TransactionSection />
+        </div>
+       
         {/* Chart */}
+      
         <ChartsSection />
+       
+       
         {/* Tables */}
+       
         <TableSection />
+       
+        
       </Grid>
       <Copyright sx={{ pt: 4 }} />
     </Container>

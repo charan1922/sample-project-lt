@@ -88,7 +88,7 @@ function TableSection() {
   return (
     <>
       <Grid item xs={12} md={6} lg={6}>
-        <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+        <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }} className="tables-section">
           <Orders 
             title = 'Quarterly Loan Submitted & Processed'
             data = {["Month", "Amount Disbursed", "Amount Reedemed"]}
@@ -96,7 +96,7 @@ function TableSection() {
         </Paper>
       </Grid>
       <Grid item xs={12} md={6} lg={6}>
-        <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+        <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }} className="tables-section">
           <Orders 
             title = "Amount Disbursed & Reedemed by Product"
             data = {["Product", "Amount Disbursed", "Amount Reedemed"]}

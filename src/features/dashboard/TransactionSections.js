@@ -88,7 +88,8 @@ function TransactionSection() {
 
   return (
     <>
-      <Grid item xs={12} md={3} lg={3} style={{borderRadius: '20px'}}>
+    
+    <Grid item xs={12} md={3} lg={3} className="col-md-3 deposits-card">
         <Paper
           sx={{
             p: 2,
@@ -97,10 +98,10 @@ function TransactionSection() {
             height: 100,
           }}
         >
-          <div style={{borderRadius: '100px', height: '4rem'}}><Deposits /></div>
+          <div style={{borderRadius: '100px', height: '4rem'}}><Deposits name="Loans Submitted" amount={500}/></div>
         </Paper>
       </Grid>
-      <Grid item xs={12} md={3} lg={3}>
+      <Grid item xs={12} md={3} lg={3} className="col-md-3 deposits-card">
         <Paper
           sx={{
             p: 2,
@@ -109,10 +110,10 @@ function TransactionSection() {
             height: 100,
           }}
         >
-          <Deposits />
+          <Deposits name="Loans Processed" amount="800" />
         </Paper>
       </Grid>
-      <Grid item xs={12} md={3} lg={3}>
+      <Grid item xs={12} md={3} lg={3} className="col-md-3 deposits-card">
         <Paper
           sx={{
             p: 2,
@@ -121,10 +122,10 @@ function TransactionSection() {
             height: 100,
           }}
         >
-          <Deposits />
+          <Deposits name="Amount Disbursed" amount="₹ 8,34,50,000" />
         </Paper>
       </Grid>
-      <Grid item xs={12} md={3} lg={3}>
+      <Grid item xs={12} md={3} lg={3} className="col-md-3 deposits-card">
         <Paper
           sx={{
             p: 2,
@@ -133,9 +134,11 @@ function TransactionSection() {
             height: 100,
           }}
         >
-          <Deposits />
+          <Deposits name="Amount Redemeed" amount="₹ 53,999" />
         </Paper>
       </Grid>
+    
+
     </>
   );
 }

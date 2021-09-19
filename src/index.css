@@ -11,3 +11,93 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+body {
+  font-family: 'Roboto', sans-serif !important;
+  margin: 0;
+  padding: 0;
+}
+.css-fxbtpg { 
+  background-color: #f8f9fd;
+}
+.sidenav-content {
+  background-color: #f8f9fd;
+  padding: 15px 30px;
+  margin: 0 !important;
+  max-width: 100% !important;
+}
+
+.tabs-section {
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 15px 0;
+}
+
+.buttons-tabs {
+  border-radius: 5px;
+  padding: 12px 24px;
+  font-size: 14px;
+  border: 1px solid #e0e2ec;
+  margin-left: 25px;
+  font-weight: 400;
+  margin: 3px;
+  background-color: #fff;
+  color: #000;
+}
+.button-active {
+  background-color: #1ecef4;
+  color: #fff;
+}
+.deposits-card p{
+  font-size: 13px;
+  font-weight: 500;
+  width: 2rem;
+  color: #1f2c61;
+}
+.deposits-card {
+  box-shadow: 10px 10px 6px -10px rgb(178 178 178 / 40%) !important;
+  padding: 0 !important;
+  max-width: 250px !important;
+}
+.deposits-card .css-1cahswr-MuiPaper-root {
+  box-shadow: 10px 10px 6px -10px rgb(178 178 178 / 40%) !important;
+}
+.deposits-container {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 17px;
+}
+.dropdown-products {
+  background-color: #fff;
+  border-radius: 5px;
+  border: 0 !important;
+  outline: 0;
+ 
+}
+.dropdown-products .css-1d3z3hw-MuiOutlinedInput-notchedOutline { 
+   border: 0 !important;
+   outline: none;
+}
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select {
+  padding: 10px 24px;
+}
+.chart-section .css-zow5z4-MuiGrid-root>.MuiGrid-item {
+  padding-left: 17px;
+}
+.chart-section h6 , .tables-section h2{
+  color: #000e4b;
+  font-size: 15px;
+}
+.chart-section , .tables-section{
+  padding: 25px 25px 0 25px !important;
+}
+.chart-section .recharts-responsive-container {
+  margin-left: -20px;
+}
+.chart-section , .tables-section {
+  box-shadow: 10px 10px 6px -10px rgb(178 178 178 / 40%) !important;
+}
+.sidenav-info {
+  padding-right: 30px;
+}

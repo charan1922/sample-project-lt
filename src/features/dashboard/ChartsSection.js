@@ -88,7 +88,8 @@ function ChartsSection() {
 
   return (
     <>
-      <Grid item xs={12} md={6} lg={6}>
+      <Grid item xs={12} md={6} lg={6} >
+     
         <Paper
           sx={{
             p: 2,
@@ -96,12 +97,17 @@ function ChartsSection() {
             flexDirection: "column",
             height: 240,
           }}
+          className="chart-section"
         >
+          <h6>Quarterly Loan Submitted & Processed</h6>
+          
           <Chart1 />
+        
+          
         </Paper>
       </Grid>
       {/* Recent Deposits */}
-      <Grid item xs={12} md={6} lg={6}>
+      <Grid item xs={12} md={6} lg={6} >
         <Paper
           sx={{
             p: 2,
@@ -109,8 +115,10 @@ function ChartsSection() {
             flexDirection: "column",
             height: 240,
           }}
+          className="chart-section"
         >
           {/* <Deposits /> */}
+          <h6>Loan Submitted & Processed By Product</h6>
           <Chart2 />
         </Paper>
       </Grid>

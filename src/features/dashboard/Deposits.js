@@ -8,16 +8,16 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Deposits() {
+export default function Deposits(props) {
   return (
   <>
   <div>
-    <span style={{fontWeight: 'bold', fontSize: 22}}>1000</span>
+    <span style={{fontWeight: '600', fontSize: 22}}> { props.amount}</span>
   </div>  
   <div style={{display: 'flex'}}>
     <div>
-    <Typography component="p" variant="h4" style={{fontSize: 14, fontWeight: 'bold', width: '2rem', color: '#3d3c3a'}}>
-          Loans Submitted
+    <Typography component="p" variant="h4">
+          {props.name}
       </Typography>
       </div>
       <div>
