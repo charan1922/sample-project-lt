@@ -32,7 +32,7 @@
     "yup": "^0.32.8"
   },
   "scripts": {
-    "start": "set PORT=3111&&react-scripts start",
+    "start": "set PORT=3111&&env-cmd -e development react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

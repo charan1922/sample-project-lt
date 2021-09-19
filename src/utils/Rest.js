@@ -17,8 +17,8 @@ function authHeaders() {
 // status check methods
 export const checkData = (response) => {
   console.log(response, ":response");
-  if (response.data && response.data.status >= 200 && response.data && response.data.status < 400) {
-    return response.data;
+  if (response?.status === 200) {
+    return response;
   }
   return response;
 };
@@ -31,6 +31,9 @@ export const checkError = (error) => {
     window.location.reload();
     // console.log("I am logged");
   }
+  // if (response?.status >= 200 && response?.status < 400) {
+  //   return response.data;
+  // }
   return error.response;
 };
 

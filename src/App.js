@@ -7,7 +7,6 @@ import {
   Redirect,
 } from "react-router-dom";
 import Login from "./features/login/Login";
-
 import AuthButton from "./components/AuthButton";
 import useAuth from "./utils/useAuth";
 import ProvideAuth from "./utils/provideAuth";
@@ -19,9 +18,12 @@ import Dashboard from "./features/dashboard";
 // import Dashboard from "./dashboard/Dashboard.js";
 import AppWrapper from "./components/AppWrapper";
 import Settings from "./features/settings";
+import TestPage from "./features/TestPage";
 import Leads from "./features/leads";
+import { ApiUrl } from "./helpers/getUrl";
 
 export default function App() {
+  console.log(ApiUrl());
   return (
     <AppWrapper>
       <ProvideAuth>
@@ -31,6 +33,7 @@ export default function App() {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/leads" component={Leads} />
             <Route path="/settings" component={Settings} />
+            <Route path="/test" component={TestPage} />
             <Route component={NotFound} />
           </Switch>
         </Router>
