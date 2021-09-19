@@ -14,6 +14,7 @@ import TransactionSection from "./TransactionSections";
 import ChartsSection from "./ChartsSection";
 import TableSection from "./TableSections";
 import TopButtons from "./topButtons";
+import Leads from "../../features/leads";
 
 function Copyright(props) {
   return (
@@ -98,6 +99,10 @@ function Dashboard() {
         <ChartsSection />
         {/* Tables */}
         <TableSection />
+      </Grid>
+      <br/>
+      <Grid>
+      <Leads/>
       </Grid>
       <Copyright sx={{ pt: 4 }} />
     </Container>
