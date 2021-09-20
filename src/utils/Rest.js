@@ -40,7 +40,7 @@ export const checkError = (error) => {
 export const httpGet = (url) => {
   return axios(ApiUrl() + url, {
     method: "GET",
-    headers: buildHeaders(),
+    headers: buildHeaders()
   })
     .then(checkData)
     .catch(checkError);
