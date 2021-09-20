@@ -49,7 +49,7 @@ export const httpGet = (url) => {
 export const httpCustomGet = (url, headers, params) => {
   return axios(url, {
     method: "GET",
-    headers: buildHeaders(),
+    headers: headers,
     params: params
   })
     .then(checkData)
