@@ -1,6 +1,6 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { httpGet , httpCustomGet } from "../../utils/Rest";
+import { httpGet } from "../../utils/Rest";
 
 const initialLeadsData = {
   leadsData: null,
@@ -43,11 +43,9 @@ const { leadsData, fetchStart, fetchError, fetchSuccess } = slice.actions;
 
 export const getLeadsData = () => {
   return (dispatch) => {
-    dispatch(fetchStart());    
-    axios(`https://614800ea65467e0017384c8d.mockapi.io/v1/data`, {
-      method: "GET"})
+    dispatch(fetchStart());
+    httpGet(`https://614800ea65467e0017384c8d.mockapi.io/v1/data`)
       .then((res) => {
-        console.log(res, ":data");
         if (res?.status === 200) {
           dispatch(leadsData(res.data));
           dispatch(fetchSuccess(res.data));
@@ -60,5 +58,3 @@ export const getLeadsData = () => {
       });
   };
 };
-
-

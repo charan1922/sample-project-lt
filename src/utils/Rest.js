@@ -46,16 +46,6 @@ export const httpGet = (url) => {
     .catch(checkError);
 };
 
-export const httpCustomGet = (url, headers, params) => {
-  return axios(url, {
-    method: "GET",
-    headers: headers,
-    params: params
-  })
-    .then(checkData)
-    .catch(checkError);
-};
-
 export const httpPost = (url, body) => {
   return axios
     .post(ApiUrl() + url, body, {
