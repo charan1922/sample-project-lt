@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import { appconstants } from "../../../constants/appconstants";
+import {
+  timeIntervalConstants,
+  productConstants,
+} from "../../../constants/appconstants";
 import AppContext from "./AppContext";
 import defaultContext from "./defaultContext";
 
 const AppContextProvider = ({ children }) => {
   const [open, setOpen] = useState(defaultContext.isDrawerOpen); // true
-  const [freqValue, setFreqValue] = useState(appconstants.MTD); 
+  const [freqValue, setFreqValue] = useState(timeIntervalConstants.MTD);
+  const [productType, setProductType] = useState(productConstants.ALL);
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -14,6 +18,9 @@ const AppContextProvider = ({ children }) => {
   const changeFreqValue = (value) => {
     setFreqValue(value);
   };
+  const changeProductType = (value) => {
+    setProductType(value);
+  };
 
   return (
     <AppContext.Provider
@@ -21,7 +28,9 @@ const AppContextProvider = ({ children }) => {
         open,
         toggleDrawer,
         freqValue,
-        changeFreqValue
+        changeFreqValue,
+        productType,
+        changeProductType,
       }}
     >
       {children}
