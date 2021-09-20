@@ -11,6 +11,7 @@ import Link from "@mui/material/Link";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems } from "./listItems";
 import AppContext from "../contextProvider/AppContextProvider/AppContext";
+import Logo from "./Logo.png";
 
 // import Chart from './Chart';
 
@@ -22,7 +23,7 @@ const Drawer = styled(MuiDrawer, {
   "& .MuiDrawer-paper": {
     position: "relative",
     whiteSpace: "nowrap",
-    background: "#3D6EF6",
+    background: "#304ffe",
     // background: "#061020",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -48,8 +49,11 @@ function SideNav() {
   const { open, toggleDrawer } = useContext(AppContext);
 
   return (
+    <>
+    
     <Drawer variant="permanent" open={open}>
-      <Toolbar
+    <img src={Logo} alt="logo" style={{padding:'20px'}} />
+      {/* <Toolbar
         sx={{
           display: "flex",
           alignItems: "center",
@@ -60,13 +64,14 @@ function SideNav() {
         <IconButton onClick={toggleDrawer}>
           <ChevronLeftIcon />
         </IconButton>
-      </Toolbar>
-      <div style={{marginLeft:'30px',fontSize:'30px'}}> Digi Loan</div>
-      <Divider />
+      </Toolbar> */}
+      
+      
       <List>{mainListItems}</List>
       <Divider />
       {/* <List>{secondaryListItems}</List> */}
     </Drawer>
+    </>
   );
 }
 

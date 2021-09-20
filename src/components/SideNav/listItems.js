@@ -14,15 +14,11 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
-import Button from '@mui/material/Button';
-import {styled} from '@mui/material/styles';
-import { render } from "react-dom";
-
 
 export const mainListItems = (
     <List>
     <ListItem >
-      <ListItemButton sx={{background:'white',borderRadius:'5px',}} >
+      <ListItemButton sx={{background:'white',borderRadius:'5px',borderRight:6,borderColor:'#40c4ff'}} >
       <ListItemIcon>
         <HomeOutlinedIcon />
       </ListItemIcon>

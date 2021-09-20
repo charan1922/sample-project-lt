@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext, useEffect } from "react";
 import { styled, createTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -10,86 +10,38 @@ import Link from "@mui/material/Link";
 // import Chart from './Chart';
 import Deposits from "./Deposits";
 import Orders from "./Orders";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const drawerWidth = 100;
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  "& .MuiDrawer-paper": {
-    position: "relative",
-    borderRadius: "10px",
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      borderRadius: "10px",
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    boxSizing: "border-box",
-    ...(!open && {
-      overflowX: "hidden",
-      borderRadius: "10px",
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      width: theme.spacing(7),
-      [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9),
-      },
-    }),
-  },
-}));
-
-const mdTheme = createTheme();
+import { useDispatch, useSelector } from "react-redux";
+import { fetchTotalProjections } from "../../redux/reducers/TotalProjections";
+import {
+  ErrorSnackbar,
+  SuccessSnackbar,
+} from "../../components/CustomSnackBar";
+import AppContext from "../../components/contextProvider/AppContextProvider/AppContext";
 
 function TransactionSection() {
-  const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
+  const dispatch = useDispatch();
+
+  const { freqValue, productType, connectorId } = useContext(AppContext);
+
+  const { totalProjectionsData, isLoading, successMsg, errorMsg } = useSelector(
+    ({ totalProjections }) => totalProjections
+  );
+
+  useEffect(() => {
+    dispatch(fetchTotalProjections(connectorId, productType, freqValue)); //Invoke Action
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [freqValue, productType, connectorId]);
+
+  const {
+    totalSubmittedLoans = 0,
+    totalDisbursedLoans = 0,
+    totalDisbursedAmount = 0,
+    totalConnectorAmount = 0,
+  } = totalProjectionsData;
 
   return (
     <>
-    
-    <Grid item xs={12} md={3} lg={3} className="col-md-3 deposits-card">
+      <Grid item xs={12} md={3} lg={3} className="col-md-3 deposits-card">
         <Paper
           sx={{
             p: 2,
@@ -98,7 +50,9 @@ function TransactionSection() {
             height: 100,
           }}
         >
-          <div style={{borderRadius: '100px', height: '4rem'}}><Deposits name="Loans Submitted" amount={500}/></div>
+          <div style={{ borderRadius: "100px", height: "4rem" }}>
+            <Deposits name="Loans Submitted" amount={totalSubmittedLoans} />
+          </div>
         </Paper>
       </Grid>
       <Grid item xs={12} md={3} lg={3} className="col-md-3 deposits-card">
@@ -110,7 +64,7 @@ function TransactionSection() {
             height: 100,
           }}
         >
-          <Deposits name="Loans Processed" amount="800" />
+          <Deposits name="Loans Processed" amount={totalDisbursedLoans} />
         </Paper>
       </Grid>
       <Grid item xs={12} md={3} lg={3} className="col-md-3 deposits-card">
@@ -122,7 +76,11 @@ function TransactionSection() {
             height: 100,
           }}
         >
-          <Deposits name="Amount Disbursed" amount="₹ 8,34,50,000" />
+          <Deposits
+            name="Amount Disbursed"
+            amount={totalDisbursedAmount}
+            type="currency"
+          />
         </Paper>
       </Grid>
       <Grid item xs={12} md={3} lg={3} className="col-md-3 deposits-card">
@@ -134,11 +92,15 @@ function TransactionSection() {
             height: 100,
           }}
         >
-          <Deposits name="Amount Redemeed" amount="₹ 53,999" />
+          <Deposits
+            name="Amount Redemeed"
+            amount={totalConnectorAmount}
+            type="currency"
+          />
         </Paper>
       </Grid>
-    
-
+      {errorMsg && <ErrorSnackbar errorMsg={errorMsg} />}
+      {successMsg && <SuccessSnackbar successMsg={successMsg} />}
     </>
   );
 }

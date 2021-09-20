@@ -10,6 +10,7 @@ const AppContextProvider = ({ children }) => {
   const [open, setOpen] = useState(defaultContext.isDrawerOpen); // true
   const [freqValue, setFreqValue] = useState(timeIntervalConstants.MTD);
   const [productType, setProductType] = useState(productConstants.ALL);
+  const [connectorId, setConnectorId] = useState(1000001);
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -31,6 +32,7 @@ const AppContextProvider = ({ children }) => {
         changeFreqValue,
         productType,
         changeProductType,
+        connectorId,
       }}
     >
       {children}
