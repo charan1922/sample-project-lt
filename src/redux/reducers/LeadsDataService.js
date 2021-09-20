@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
+import axios from "axios";
 import { httpGet , httpCustomGet } from "../../utils/Rest";
 
 const initialLeadsData = {
@@ -42,13 +43,9 @@ const { leadsData, fetchStart, fetchError, fetchSuccess } = slice.actions;
 
 export const getLeadsData = () => {
   return (dispatch) => {
-    dispatch(fetchStart());
-    // httpCustomGet(`https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup`, 
-    // `{
-    //   'x-rapidapi-host': 'utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com',
-    //   'x-rapidapi-key': 'undefined'
-    // }`,`{source_id: 'tt3398228', source: 'imdb', country: 'us'}`)
-    httpCustomGet(`http://api.plos.org/search?q=title:DNA`)
+    dispatch(fetchStart());    
+    axios(`https://614800ea65467e0017384c8d.mockapi.io/v1/data`, {
+      method: "GET"})
       .then((res) => {
         console.log(res, ":data");
         if (res?.status === 200) {
