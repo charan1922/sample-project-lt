@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import MaterialTable from "material-table";
 import { forwardRef } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -18,6 +19,7 @@ import Remove from '@mui/icons-material/Remove';
 import SaveAlt from '@mui/icons-material/SaveAlt';
 import Search from '@mui/icons-material/Search';
 import ViewColumn from '@mui/icons-material/ViewColumn';
+import { getLeadsData } from "../../redux/reducers/LeadsDataService";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -41,6 +43,17 @@ const tableIcons = {
 
 
 function Leads() {
+
+  const dispatch = useDispatch(); // used to dispatch an action
+
+  const { leadsData, isLoading, successMsg, errorMsg } = useSelector(
+    ({ leadsDataService }) => leadsDataService
+  );
+  
+  useEffect(() => {
+    dispatch(getLeadsData()); //Invoke Action
+  }, []);
+
   return (
     <MaterialTable
     icons={tableIcons}
@@ -63,6 +76,7 @@ function Leads() {
           icon: SaveIcon,
           tooltip: 'Save User',
           onClick: (event, rowData) => alert("You saved " + rowData.name)
+
         },
         rowData => ({
           icon: DeleteIcon,
