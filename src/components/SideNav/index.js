@@ -22,7 +22,7 @@ const Drawer = styled(MuiDrawer, {
   "& .MuiDrawer-paper": {
     position: "relative",
     whiteSpace: "nowrap",
-    // background: "#3D6EF6",
+    background: "#3D6EF6",
     // background: "#061020",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
@@ -61,9 +61,10 @@ function SideNav() {
           <ChevronLeftIcon />
         </IconButton>
       </Toolbar>
+      <div style={{marginLeft:'30px',fontSize:'30px'}}> Digi Loan</div>
       <Divider />
       <List>{mainListItems}</List>
-      {/* <Divider /> */}
+      <Divider />
       {/* <List>{secondaryListItems}</List> */}
     </Drawer>
   );

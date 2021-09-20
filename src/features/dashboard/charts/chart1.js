@@ -14,13 +14,15 @@ import {
 const data1 = [
   { name: "Q1", submitted: 4000, processed: 2400 },
   { name: "Q2", submitted: 3000, processed: 1398 },
-  { name: "Q3", submitted: 2000, processed: 9800 },
+  { name: "Q3", submitted: 2000, processed: 12000 },
 ];
 
+
 function Chart1() {
+
   return (
       <ResponsiveContainer>
-        <BarChart
+        <BarChart 
           data={data1}
           margin={{ top: 30, bottom: 30, left: 15, right: 15 }}
         >
@@ -29,8 +31,8 @@ function Chart1() {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="processed" fill="#8884d8" />
-          <Bar dataKey="submitted" fill="#82ca9d" />
+            <Bar barSize={15} dataKey="processed" fill="#ffc107" />
+            <Bar barSize={15} dataKey="submitted" fill="#8bc34a" />
         </BarChart>
       </ResponsiveContainer>
   );

@@ -22,6 +22,7 @@ function Chart2() {
   return (
     <ResponsiveContainer>
       <BarChart
+        
         data={data2}
         margin={{ top: 30, bottom: 30, left: 15, right: 15 }}
       >
@@ -30,8 +31,8 @@ function Chart2() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="processed" fill="#feb2b2" />
-        <Bar dataKey="submitted" fill="#fbd38d" />
+        <Bar barSize={15} dataKey="processed" fill="#feb2b2" />
+        <Bar barSize={15} dataKey="submitted" fill="#33c9dc" />
       </BarChart>
     </ResponsiveContainer>
   );
