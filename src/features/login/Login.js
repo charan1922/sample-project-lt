@@ -1,4 +1,4 @@
-
+import React, { useState } from "react";
 import {
     useHistory,
     useLocation
@@ -35,12 +35,19 @@ function Copyright(props) {
   
 const theme = createTheme();
 
+
 export default function LoginPage() {
     let history = useHistory();
     let location = useLocation();
     let auth = useAuth();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     let { from } = location.state || { from: { pathname: "/" } };
+
+    function validateForm() {
+        return email.length > 0 && password.length > 0;
+      }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -82,7 +89,7 @@ export default function LoginPage() {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
+              autoFocus onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -93,6 +100,7 @@ export default function LoginPage() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -102,7 +110,7 @@ export default function LoginPage() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2 }} disabled={!validateForm()}
             >
               Sign In
             </Button>

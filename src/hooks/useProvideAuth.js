@@ -25,7 +25,7 @@ export default function useProvideAuth() {
     const signout = cb => {
         return fakeAuth.signout(() => {
             setUser(null);
-            cb();
+            //cb();
         });
     };
 
