@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo } from "react";
 import {
     useHistory,
     useLocation
@@ -18,6 +18,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 
 function Copyright(props) {
     return (
@@ -32,32 +34,60 @@ function Copyright(props) {
   
 const theme = createTheme();
 
+const useYupValidationResolver = validationSchema =>
+  useCallback(
+    async data => {
+      try {
+        const values = await validationSchema.validate(data, {
+          abortEarly: false
+        });
+
+        return {
+          values,
+          errors: {}
+        };
+      } catch (errors) {
+        return {
+          values: {},
+          errors: errors.inner.reduce(
+            (allErrors, currentError) => ({
+              ...allErrors,
+              [currentError.path]: {
+                type: currentError.type ?? "validation",
+                message: currentError.message
+              }
+            }),
+            {}
+          )
+        };
+      }
+    },
+    [validationSchema]
+  );
+  
+const validationSchema = yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().min(8).max(32).required(),
+});
+
 export default function LoginPage() {
     let history = useHistory();
     let location = useLocation();
     let auth = useAuth();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+   
+    const resolver = useYupValidationResolver(validationSchema);
+    const { handleSubmit, register, formState: { errors }, reset } = useForm({ resolver });      
 
-    let { from } = location.state || { from: { pathname: "/" } };
+    const onSubmitHandler = (data) => {
+      console.log({ data });
+      reset();
+      auth.signin(() => {
+        history.replace(from);
+    });
+  }
 
-    function validateForm() {
-        return email.length > 0 && password.length > 0;
-      }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-          email: data.get('email'),
-          password: data.get('password'),
-        });
-        auth.signin(() => {
-            history.replace(from);
-        });
-      };
-
+    let { from } = location.state || { from: { pathname: "/" } };   
+    
     return (
       <ThemeProvider theme={theme}>
      <Grid container component="main" sx={{ height: '100vh' }}>
@@ -92,7 +122,7 @@ export default function LoginPage() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box component="form" noValidate onSubmit={handleSubmit(onSubmitHandler)} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -102,8 +132,9 @@ export default function LoginPage() {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                onChange={(e) => setEmail(e.target.value)}
+                {...register("email")}
               />
+              <p>{errors.email?.message}</p>
               <TextField
                 margin="normal"
                 required
@@ -113,8 +144,9 @@ export default function LoginPage() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={(e) => setPassword(e.target.value)}
+                {...register("password")}
               />
+              <p>{errors.password?.message}</p>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
@@ -123,7 +155,7 @@ export default function LoginPage() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }} disabled={!validateForm()}
+                sx={{ mt: 3, mb: 2 }}
               >
                 Sign In
               </Button>
