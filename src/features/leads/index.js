@@ -20,6 +20,7 @@ import SaveAlt from '@mui/icons-material/SaveAlt';
 import Search from '@mui/icons-material/Search';
 import ViewColumn from '@mui/icons-material/ViewColumn';
 import { getLeadsData } from "../../redux/reducers/LeadsDataService";
+import TopButtons from "./topButtons";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -55,7 +56,11 @@ function Leads() {
   }, []);
 
   return (
-    <MaterialTable
+    <div>
+     <div className="col-md-12 p-0">
+          <TopButtons />
+        </div>
+    <MaterialTable 
     icons={tableIcons}
       title="Leads Data"
       columns={[
@@ -70,25 +75,12 @@ function Leads() {
       data={[
         { name: 'EMANDI VIJAYALAXMI', producttype: 'Personal Loan', loanamount: 650000, loanstatus: 'Applied',  redeemstatus: 'Pending', applicationnumber: '76443618(S)', applicationdate: '23-03-2021 04:00 PM'},
         { name: 'NERUGATTI CHARAN KUMAR', producttype: 'Personal Loan', loanamount: 1500000, loanstatus: 'Rejected',  redeemstatus: 'Redeemed', applicationnumber: 'IC76501384(S)', applicationdate: '20-03-2021 04:00 PM'},  
-      ]}
-      actions={[
-        {
-          icon: SaveIcon,
-          tooltip: 'Save User',
-          onClick: (event, rowData) => alert("You saved " + rowData.name)
-
-        },
-        rowData => ({
-          icon: DeleteIcon,
-          tooltip: 'Delete User',
-          onClick: (event, rowData) => window.confirm("You want to delete " + rowData.name),
-          disabled: rowData.birthYear < 2000
-        })
-      ]}
+      ]}      
       options={{
-        actionsColumnIndex: -1
+        actionsColumnIndex: -1, search: false
       }}
     />
+    </div>
   )
 }
 
