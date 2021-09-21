@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import { httpGet } from "../../utils/Rest";
 
 const initialLeadsData = {
