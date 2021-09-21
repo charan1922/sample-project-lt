@@ -5,6 +5,7 @@ import {
   Route,
   Link,
   Redirect,
+  NavLink
 } from "react-router-dom";
 import Login from "./features/login/Login";
 import AuthButton from "./components/AuthButton";
@@ -24,23 +25,34 @@ import { ApiUrl } from "./helpers/getUrl";
 
 export default function App() {
   console.log(ApiUrl());
-  return (
-    <AppWrapper>
-      <ProvideAuth>
-        <Router>
-          <Switch>
-            <Route path="/" exact component={Dashboard} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/leads" component={Leads} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/test" component={TestPage} />
-            <Route component={NotFound} />
-          </Switch>
-        </Router>
-      </ProvideAuth>
-    </AppWrapper>
-  );
+
+  let auth = useAuth();
+
+  if (auth == undefined || auth.user == undefined || auth.user == null)
+    return (
+      <Login></Login>
+    );
+  else
+    return (
+      <AppWrapper>
+        <ProvideAuth>
+          <Router>
+            <Switch>
+              <Route path="/" exact component={Dashboard} />
+              <Route path="/login" exact component={Login} />
+              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/leads" component={Leads} />
+              <Route path="/settings" component={Settings} />
+              <Route path="/test" component={TestPage} />
+              <Route component={NotFound} />
+            </Switch>
+          </Router>
+        </ProvideAuth>
+      </AppWrapper>
+    );
 }
+
+
 function PrivateRoute({ children, ...rest }) {
   let auth = useAuth();
   return (

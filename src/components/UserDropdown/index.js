@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 // import { AuhMethods } from '../../../../services/auth';
 // import { CurrentAuthMethod } from '../../../constants/AppConstants';
 import { useHistory } from "react-router";
+import useAuth from "../../utils/useAuth";
 
 const useStyles = makeStyles((theme) => ({
   profileRoot: {
@@ -79,10 +80,12 @@ const UserDropDown = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+  let auth = useAuth();
 
   const onItemClick = (item) => {
     if (item.label === "Logout") {
       // dispatch(AuthenticationMethods.jwtAuth.onLogout());
+      auth.signout();
       history.push("/signin");
     }
     if (item.label === "Add Hospital") {

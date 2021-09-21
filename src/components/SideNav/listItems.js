@@ -13,43 +13,44 @@ import LayersIcon from "@mui/icons-material/Layers";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import LoginIcon from '@mui/icons-material/Login';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
 
 export const mainListItems = (
-    <List>
+  <List>    
     <ListItem >
-      <ListItemButton sx={{background:'white',borderRadius:'5px',borderRight:6,borderColor:'#40c4ff'}} >
-      <ListItemIcon>
-        <HomeOutlinedIcon />
-      </ListItemIcon>
-      <ListItemText primary="Home" />
+      <ListItemButton sx={{ background: 'white', borderRadius: '5px', borderRight: 6, borderColor: '#40c4ff' }} >
+        <ListItemIcon>
+          <HomeOutlinedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Home" />
       </ListItemButton>
     </ListItem>
 
     <ListItem >
-      <ListItemButton sx={{borderRadius:'5px',color:'white'}}>
-      <ListItemIcon sx={{color:'white'}}> 
-        <PersonOutlinedIcon />
-      </ListItemIcon>
-      <ListItemText primary="Leads" />
+      <ListItemButton sx={{ borderRadius: '5px', color: 'white' }}>
+        <ListItemIcon sx={{ color: 'white' }}>
+          <PersonOutlinedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Leads" />
       </ListItemButton>
     </ListItem>
 
     <ListItem >
-      <ListItemButton sx={{borderRadius:'5px',color:'white'}}>
-      <ListItemIcon sx={{color:'white'}} > 
-        <FactCheckOutlinedIcon/>
-      </ListItemIcon>
-      <ListItemText primary="Loan Enquiry" />
+      <ListItemButton sx={{ borderRadius: '5px', color: 'white' }}>
+        <ListItemIcon sx={{ color: 'white' }} >
+          <FactCheckOutlinedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Loan Enquiry" />
       </ListItemButton>
     </ListItem>
 
     <ListItem >
-      <ListItemButton sx={{borderRadius:'5px',color:'white'}} >
-      <ListItemIcon sx={{color:'white'}}>
-        <SettingsOutlinedIcon />
-      </ListItemIcon>
-      <ListItemText primary="Settings" />
+      <ListItemButton sx={{ borderRadius: '5px', color: 'white' }} >
+        <ListItemIcon sx={{ color: 'white' }}>
+          <SettingsOutlinedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Settings" />
       </ListItemButton>
     </ListItem>
   </List>

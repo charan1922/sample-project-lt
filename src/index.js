@@ -8,17 +8,21 @@ import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 import reportWebVitals from "./reportWebVitals";
 import AppContextProvider from "./components/contextProvider/AppContextProvider";
+import ProvideAuth from "./utils/provideAuth";
+
 export const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
+    <ProvideAuth>
     <AppContextProvider>
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <App />
+          <App/>
         </ConnectedRouter>
       </Provider>
     </AppContextProvider>
+    </ProvideAuth>
   </React.StrictMode>,
   document.getElementById("root")
 );
