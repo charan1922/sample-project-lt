@@ -28,11 +28,11 @@ export default function App() {
 
   let auth = useAuth();
 
-  if (auth == undefined || auth.user == undefined || auth.user == null)
-    return (
-      <Login></Login>
-    );
-  else
+  // if (auth == undefined || auth.user == undefined || auth.user == null)
+  //   return (
+  //     <Login></Login>
+  //   );
+  // else
     return (
       <AppWrapper>
         <ProvideAuth>
