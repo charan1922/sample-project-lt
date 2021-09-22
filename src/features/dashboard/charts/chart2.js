@@ -12,10 +12,15 @@ import {
 } from "recharts";
 
 const data2 = [
-  { name: "Credit Card", submitted: 4000, processed: 2400 },
-  { name: "Business Loan", submitted: 2000, processed: 4800 },
-  { name: "Personal Loan", submitted: 3000, processed: 1398 },
-  { name: "Insurance", submitted: 2780, processed: 3908 },
+  { name: "CC", submitted: 4000, processed: 2400 },
+  { name: "BL", submitted: 2000, processed: 4800 },
+  { name: "PL", submitted: 3000, processed: 1398 },
+  { name: "IN", submitted: 1780, processed: 3908 },
+  { name: "HL", submitted: 2780, processed: 5908 },
+  { name: "AL", submitted: 4880, processed: 3908 },
+  { name: "GL", submitted: 6780, processed: 1908 },
+  { name: "EL", submitted: 6000, processed: 2908 },
+
 ];
 
 function Chart2() {
