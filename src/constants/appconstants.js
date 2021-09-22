@@ -12,4 +12,10 @@ export const productConstants = {
   AUTO: "AUTO",
   HOME: "HOME",
   BUSINESS: "BUSINESS",
+  GOLD: "GOLD",
+  INSURANCE:"INSURANCE",
+  CREDITCARD:"CREDITCARD",
+  EDUCATION:"EDUCATION"
+
 };
+
