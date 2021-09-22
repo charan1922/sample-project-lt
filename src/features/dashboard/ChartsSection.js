@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useContext } from "react";
 import { styled, createTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -13,6 +14,7 @@ import Orders from "./Orders";
 import TransactionSection from "./TransactionSections";
 import Chart2 from "./charts/chart2";
 import Chart1 from "./charts/chart1";
+import AppContextProvider from "../../components/contextProvider/AppContextProvider/AppContext";
 
 function Copyright(props) {
   return (
@@ -77,7 +79,7 @@ const Drawer = styled(MuiDrawer, {
     }),
   },
 }));
-
+ 
 const mdTheme = createTheme();
 
 function ChartsSection() {
@@ -85,6 +87,24 @@ function ChartsSection() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  const { freqValue } =
+  useContext(AppContextProvider);
+
+  const renderSwitch=(param)=>{
+    switch(param){
+      case 'MTD':
+        return "Monthly";
+      case 'LTD':
+        return "LTD";
+      case 'YTD':
+        return "Yearly";
+      case 'QTD':
+      return "Quarterly";
+      case 'HTD':
+      return "Half Yearly";
+    }
+  }
 
   return (
     <>
@@ -99,7 +119,9 @@ function ChartsSection() {
           }}
           className="chart-section"
         >
-          <h6>Quarterly Loan Submitted & Processed</h6>
+          <div> 
+           <h6 style={{display:"inline-block"}} > {renderSwitch(freqValue)}</h6> <h6 style={{display:"inline-block"}}> Loan Submitted & Processed</h6>
+          </div>
           
           <Chart1 />
         
