@@ -10,7 +10,7 @@ import {
 
 const TopButtons = (props) => {
   const { LTD, YTD, HTD, QTD, MTD } = timeIntervalConstants;
-  const { ALL, PERSONAL, AUTO, HOME, BUSINESS } = productConstants;
+  const { ALL, PERSONAL, AUTO, HOME, BUSINESS, GOLD, INSURANCE, CREDITCARD, EDUCATION } = productConstants;
 
   const { freqValue, changeFreqValue, productType, changeProductType } =
     useContext(AppContextProvider);
@@ -18,7 +18,7 @@ const TopButtons = (props) => {
   const UpdateActiveButton = (freq) => {
     changeFreqValue(freq);
   };
-
+ 
   const handleChange = (event) => {
     changeProductType(event.target.value);
   };
@@ -86,10 +86,16 @@ const TopButtons = (props) => {
               inputProps={{ "aria-label": "Without label" }}
             >
               <MenuItem value={ALL}>All Products</MenuItem>
-              <MenuItem value={PERSONAL}>Personal</MenuItem>
-              <MenuItem value={AUTO}>Auto</MenuItem>
-              <MenuItem value={HOME}>Home</MenuItem>
-              <MenuItem value={BUSINESS}>Business</MenuItem>
+              <MenuItem value={PERSONAL}>Personal Loan</MenuItem>
+              <MenuItem value={BUSINESS}>Business Loan</MenuItem>
+              <MenuItem value={HOME}>Home Loan/LAP</MenuItem>
+              <MenuItem value={AUTO}>Auto Loan</MenuItem>
+              <MenuItem value={GOLD}>Gold Loan</MenuItem>
+              <MenuItem value={INSURANCE}>Insurance</MenuItem>
+              <MenuItem value={CREDITCARD}>Credit Card</MenuItem>
+              <MenuItem value={EDUCATION}>Education Loan</MenuItem>
+              
+              
             </Select>
           </FormControl>
         </div>
@@ -99,3 +105,4 @@ const TopButtons = (props) => {
 };
 
 export default React.memo(TopButtons);
+
