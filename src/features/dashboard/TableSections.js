@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useContext } from "react";
 import { styled, createTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -12,6 +13,7 @@ import Deposits from "./Deposits";
 import Orders from "./Orders";
 import TransactionSection from "./TransactionSections";
 import ChartsSection from "./ChartsSection";
+import AppContextProvider from "../../components/contextProvider/AppContextProvider/AppContext";
 
 function Copyright(props) {
   return (
@@ -76,7 +78,7 @@ const Drawer = styled(MuiDrawer, {
     }),
   },
 }));
-
+ 
 const mdTheme = createTheme();
 
 function TableSection() {
@@ -85,12 +87,30 @@ function TableSection() {
     setOpen(!open);
   };
 
+  const { freqValue } =
+  useContext(AppContextProvider);
+
+  const renderSwitch=(param)=>{
+    switch(param){
+      case 'MTD':
+        return "Monthly";
+      case 'LTD':
+        return "LTD";
+      case 'YTD':
+        return "Yearly";
+      case 'QTD':
+      return "Quarterly";
+      case 'HTD':
+      return "Half Yearly";
+    }
+  }
+  const Title=renderSwitch(freqValue).concat('Loan Submitted & Processed ');
   return (
     <>
       <Grid item xs={12} md={6} lg={6}>
         <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }} className="tables-section">
           <Orders 
-            title = 'Quarterly Loan Submitted & Processed'
+            title = {Title}
             data = {["Month", "Amount Disbursed", "Amount Reedemed"]}
           />
         </Paper>
