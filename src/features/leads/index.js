@@ -379,7 +379,7 @@ function Leads() {
   return (
     <div className="sidenav-content">
       
-      
+      <div className="upload-lead-buttons">
       <Button variant="outlined" endIcon={<FileUploadOutlinedIcon />} className={classes.button}>
         Bulk Upload
       </Button>
@@ -388,6 +388,8 @@ function Leads() {
       <Button variant="outlined" startIcon={<AddOutlinedIcon />} onClick={handleAddLead} className={classes.button}>
         Add Lead
       </Button>
+      </div>
+   
      
       <div>
       <MaterialTable

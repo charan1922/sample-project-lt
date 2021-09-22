@@ -104,3 +104,6 @@ body {
 .form-fields {
   align-items: center;
 }
+.upload-lead-buttons {
+  text-align: right;
+}
