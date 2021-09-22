@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import AppContext from "../contextProvider/AppContextProvider/AppContext";
 import UserDropDown from '../UserDropdown';
 
@@ -40,6 +40,7 @@ function Header() {
       <Toolbar
         sx={{
           pr: "24px", // keep right padding when drawer closed
+          backgroundColor: 'white',
         }}
       >
         <IconButton
@@ -63,9 +64,9 @@ function Header() {
         >
           Dashboard
         </Typography>
-        <IconButton color="inherit">
+        <IconButton >
           <Badge badgeContent={4} color="secondary">
-            <NotificationsIcon />
+            <NotificationsNoneOutlinedIcon />
           </Badge>
         </IconButton>
         <UserDropDown />
