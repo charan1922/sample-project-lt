@@ -70,9 +70,9 @@ const useYupValidationResolver = validationSchema =>
 const validationSchema = yup.object({
   customerName: yup.string().required(),
   productType: yup.string().required(),
-  customerPhone: yup.number().positive().integer().required(),
+  customerPhone: yup.number().test('len', 'Please enter valid mobile number', (val) => val.toString().length == 10).required(),
   loanBank: yup.string().required(),
-  loanAmount: yup.string().required(),
+  loanAmount: yup.number().positive().integer().required(),
   leadManager: yup.string().required(),
   location: yup.string().required(),
   loanState: yup.string().required(),
