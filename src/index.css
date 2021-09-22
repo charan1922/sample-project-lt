@@ -101,3 +101,6 @@ body {
 .sidenav-info {
   padding-right: 30px;
 }
+.form-fields {
+  align-items: center;
+}

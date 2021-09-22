@@ -66,7 +66,7 @@ const useYupValidationResolver = validationSchema =>
     },
     [validationSchema]
   );
-  
+
 const validationSchema = yup.object({
   customerName: yup.string().required(),
   productType: yup.string().required(),
@@ -85,17 +85,17 @@ const validationSchema = yup.object({
 const useStyles = makeStyles(theme => ({
   tableCell: { textAlign: 'center' },
   select: {
-      width: '200px',
-      margin: '5px'
+    width: '200px',
+    margin: '5px'
   },
-  textField: {
-    marginLeft: '30px'
-  },
+  // textField: {
+  //   marginLeft: '30px'
+  // },
   formControl: {
-      padding: '5px', 
-      width: '250px'
+    padding: '5px',
+    width: '250px'
   },
-
+ 
 }));
 
 const tableIcons = {
@@ -129,46 +129,46 @@ function Leads() {
     ({ leadsDataService }) => leadsDataService
   );
 
-  const states = [ "Andhra Pradesh",
-                "Arunachal Pradesh",
-                "Assam",
-                "Bihar",
-                "Chhattisgarh",
-                "Goa",
-                "Gujarat",
-                "Haryana",
-                "Himachal Pradesh",
-                "Jammu and Kashmir",
-                "Jharkhand",
-                "Karnataka",
-                "Kerala",
-                "Madhya Pradesh",
-                "Maharashtra",
-                "Manipur",
-                "Meghalaya",
-                "Mizoram",
-                "Nagaland",
-                "Odisha",
-                "Punjab",
-                "Rajasthan",
-                "Sikkim",
-                "Tamil Nadu",
-                "Telangana",
-                "Tripura",
-                "Uttarakhand",
-                "Uttar Pradesh",
-                "West Bengal",
-                "Andaman and Nicobar Islands",
-                "Chandigarh",
-                "Dadra and Nagar Haveli",
-                "Daman and Diu",
-                "Delhi",
-                "Lakshadweep",
-                "Puducherry"]
+  const states = ["Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jammu and Kashmir",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttarakhand",
+    "Uttar Pradesh",
+    "West Bengal",
+    "Andaman and Nicobar Islands",
+    "Chandigarh",
+    "Dadra and Nagar Haveli",
+    "Daman and Diu",
+    "Delhi",
+    "Lakshadweep",
+    "Puducherry"]
 
 
   const resolver = useYupValidationResolver(validationSchema);
-  const { handleSubmit, register, formState: { errors }, reset } = useForm({ resolver });      
+  const { handleSubmit, register, formState: { errors }, reset } = useForm({ resolver });
 
 
   const [addLead, setAddLead] = useState("");
@@ -186,222 +186,253 @@ function Leads() {
   };
 
   const addAPI = () => {
-    console.log("eroor",errors)
+    console.log("eroor", errors)
     setOpenLead(false)
     console.log("aksmlm")
   }
-  
+
   useEffect(() => {
     dispatch(getLeadsData()); //Invoke Action
   }, []);
 
   const addLeadElement = <Dialog open={openLead} onClose={handleClose}>
-      <DialogTitle>Lead Entry Module - Connector</DialogTitle>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <DialogTitle>Lead Entry Module - Connector</DialogTitle>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <DialogContent>
-      <FormControl variant="standard" className={classes.formControl}>
-        <TextField
-        className={classes.textField}
-          autoFocus
-          margin="dense"
-          {...register("customerName")}
-          label="Customer Name"
-          fullWidth
-          variant="standard"
-        />
-        <p style={{color: 'red' , fontSize: 9}}>{errors.customerName?.message}</p>
-        </FormControl>
-        <FormControl variant="standard" className={classes.formControl}>
-        <InputLabel sx={{marginLeft: '30px'}}>Product Type</InputLabel>
-        <Select
+        <div className="row form-fields">
+       
+          <div className="col-md-6">
+            <FormControl variant="standard" className={classes.formControl}>
+              <TextField
                 className={classes.textField}
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
-          sx={{marginTop: '20px', marginLeft: '30px'}}
-          {...register("productType")}
-          label="Product Type"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-        <p style={{color: 'red' , fontSize: 9}}>{errors.productType?.message}</p>
-        </FormControl>
-        <FormControl variant="standard" className={classes.formControl}>
-        <TextField
+                autoFocus
+                margin="dense"
+                {...register("customerName")}
+                label="Customer Name"
+                fullWidth
+                variant="standard"
+              />
+              <p style={{ color: 'red', fontSize: 9 }}>{errors.customerName?.message}</p>
+            </FormControl>
+          </div>
+          <div className="col-md-6">
+            <FormControl variant="standard" className={classes.formControl}>
+              <InputLabel >Product Type</InputLabel>
+              <Select
                 className={classes.textField}
-          autoFocus
-          type='number'
-          margin="dense"
-          {...register("customerPhone")}
-          label="Customer Mobile Number"
-          fullWidth
-          variant="standard"
-        />
-        <p style={{color: 'red' , fontSize: 9}}>{errors.customerPhone?.message}</p>
-        </FormControl>
-        <FormControl variant="standard" className={classes.formControl}>
-        <InputLabel sx={{marginLeft: '30px'}}>Bank Name</InputLabel>
-        <Select
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
-          sx={{marginTop: '20px', marginLeft: '30px'}}
-          {...register("loanBank")}
-          label="Bank Name"
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-        <p style={{color: 'red' , fontSize: 9}}>{errors.loanBank?.message}</p>
-        </FormControl>
-        <FormControl variant="standard" className={classes.formControl}>
-        <TextField
-        className={classes.textField}
-          autoFocus
-          margin="dense"
-          {...register("loanAmount")}
-          label="Loan Amount"
-          fullWidth
-          variant="standard"
-        />
-        <p style={{color: 'red' , fontSize: 9}}>{errors.loanAmount?.message}</p>
-        </FormControl>
-        <FormControl variant="standard" className={classes.formControl}>
-        <TextField
-        className={classes.textField}
-          autoFocus
-          margin="dense"
-          {...register("leadManager")}
-          sx={{marginLeft: '30px'}}
-          label="Manager"
-          fullWidth
-          variant="standard"
-        />
-        <p style={{color: 'red' , fontSize: 9}}>{errors.leadManager?.message}</p>
-        </FormControl>
-        <FormControl variant="standard" className={classes.formControl}>
-        <TextField
-        className={classes.textField}
-          autoFocus
-          margin="dense"
-          {...register("location")}
-          label="Location"
-          fullWidth
-          variant="standard"
-        />
-        <p style={{color: 'red' , fontSize: 9}}>{errors.location?.message}</p>
-        </FormControl>
-        <FormControl variant="standard" className={classes.formControl}>
-        <InputLabel sx={{marginLeft: '30px'}}>State</InputLabel>
-        <Select
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
-          sx={{marginTop: '30px', marginLeft: '30px'}}
-          {...register("loanState")}
-          fullWidth
-        >
-          {states.map((x)=> <MenuItem value={x}>{x}</MenuItem>)}
-        </Select>
-        <p style={{color: 'red' , fontSize: 9}}>{errors.loanState?.message}</p>
-        </FormControl>
-        <FormControl variant="standard" className={classes.formControl}>
-        <TextField
-        className={classes.textField}
-          autoFocus
-          margin="dense"
-          {...register("applicationNumber")}
-          label="Application Number"
-          
-          variant="standard"
-        />
-        <p style={{color: 'red' , fontSize: 9}}>{errors.applicationNumber?.message}</p>
-        </FormControl>
-        <FormControl variant="standard" className={classes.formControl}>
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                sx={{ marginTop: '20px' }}
+                {...register("productType")}
+                label="Product Type"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+              <p style={{ color: 'red', fontSize: 9 }}>{errors.productType?.message}</p>
+            </FormControl>
+          </div>
+          <div className="col-md-6">
+            <FormControl variant="standard" className={classes.formControl}>
+              <TextField
+                className={classes.textField}
+                autoFocus
+                type='number'
+                margin="dense"
+                {...register("customerPhone")}
+                label="Customer Mobile Number"
+                fullWidth
+                variant="standard"
+              />
+              <p style={{ color: 'red', fontSize: 9 }}>{errors.customerPhone?.message}</p>
+            </FormControl>
+          </div>
+          <div className="col-md-6">
+            <FormControl variant="standard" className={classes.formControl}>
+              <InputLabel >Bank Name</InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                sx={{ marginTop: '20px' }}
+                {...register("loanBank")}
+                label="Bank Name"
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+              <p style={{ color: 'red', fontSize: 9 }}>{errors.loanBank?.message}</p>
+            </FormControl>
+          </div>
+          <div className="col-md-6">
+            <FormControl variant="standard" className={classes.formControl}>
+              <TextField
+                className={classes.textField}
+                autoFocus
+                margin="dense"
+                {...register("loanAmount")}
+                label="Loan Amount"
+                fullWidth
+                variant="standard"
+              />
+              <p style={{ color: 'red', fontSize: 9 }}>{errors.loanAmount?.message}</p>
+            </FormControl>
+          </div>
+          <div className="col-md-6">
+            <FormControl variant="standard" className={classes.formControl}>
+              <TextField
+                className={classes.textField}
+                autoFocus
+                margin="dense"
+                {...register("leadManager")}
+                
+                label="Manager"
+                fullWidth
+                variant="standard"
+              />
+              <p style={{ color: 'red', fontSize: 9 }}>{errors.leadManager?.message}</p>
+            </FormControl>
+          </div>
+          <div className="col-md-6">
+            <FormControl variant="standard" className={classes.formControl}>
+              <TextField
+                className={classes.textField}
+                autoFocus
+                margin="dense"
+                {...register("location")}
+                label="Location"
+                fullWidth
+                variant="standard"
+              />
+              <p style={{ color: 'red', fontSize: 9 }}>{errors.location?.message}</p>
+            </FormControl>
+          </div>
+          <div className="col-md-6">
+            <FormControl variant="standard" className={classes.formControl}>
+              <InputLabel >State</InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                sx={{ marginTop: '30px' }}
+                {...register("loanState")}
+                fullWidth
+              >
+                {states.map((x) => <MenuItem value={x}>{x}</MenuItem>)}
+              </Select>
+              <p style={{ color: 'red', fontSize: 9 }}>{errors.loanState?.message}</p>
+            </FormControl>
+          </div>
+          <div className="col-md-6">
 
-      </FormControl>
-        <FormControl variant="standard" className={classes.formControl}>
-        <InputLabel>Pay Out Type</InputLabel>
-        <Select
-        
-          labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
-          sx={{marginTop: '20px'}}
-          {...register("payOutType")}
-          label="Pay Out Type"
-          fullWidth
-        >
+            <FormControl variant="standard" className={classes.formControl}>
+              <TextField
+                className={classes.textField}
+                autoFocus
+                margin="dense"
+                {...register("applicationNumber")}
+                label="Application Number"
 
-          <MenuItem value='Not Processed'>Not Processed</MenuItem>
-          <MenuItem value='Pending for Review'>Pending for Review</MenuItem>
-          <MenuItem value='Pending for Payment'>Pending for Payment</MenuItem>
-          <MenuItem value='Payment Processing'>Payment Processing</MenuItem>
-        </Select>
-        <p style={{color: 'red' , fontSize: 9}}>{errors.payOutType?.message}</p>
-       </FormControl> 
+                variant="standard"
+              />
+              <p style={{ color: 'red', fontSize: 9 }}>{errors.applicationNumber?.message}</p>
+            </FormControl>
+          </div>
+          <div className="col-md-6">
+            <FormControl variant="standard" className={classes.formControl}>
+              <InputLabel>Pay Out Type</InputLabel>
+              <Select
+
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                sx={{ marginTop: '20px' }}
+                {...register("payOutType")}
+                label="Pay Out Type"
+                fullWidth
+              >
+
+                <MenuItem value='Not Processed'>Not Processed</MenuItem>
+                <MenuItem value='Pending for Review'>Pending for Review</MenuItem>
+                <MenuItem value='Pending for Payment'>Pending for Payment</MenuItem>
+                <MenuItem value='Payment Processing'>Payment Processing</MenuItem>
+              </Select>
+              <p style={{ color: 'red', fontSize: 9 }}>{errors.payOutType?.message}</p>
+            </FormControl>
+          </div>
+        </div>
+        {/* <FormControl variant="standard" className={classes.formControl}>
+
+      </FormControl> */}
+
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
-        <Button variant="outlined" type="submit" onClick={addAPI}>Add Lead</Button>
+        <Button onClick={handleClose} >Cancel</Button>
+        <Button  type="submit" onClick={addAPI}>Add Lead</Button>
+      
       </DialogActions>
     </form>
-    </Dialog>
+  </Dialog>
 
   return (
-    <div>
-    {/* <Stack direction="row" spacing={2}> */}
-      <Button variant="outlined" endIcon={<FileUploadOutlinedIcon />}>
+    <div className="sidenav-content">
+      
+      
+      <Button variant="outlined" endIcon={<FileUploadOutlinedIcon />} className={classes.button}>
         Bulk Upload
       </Button>
       {addLead}
 
-      <Button variant="outlined" startIcon={<AddOutlinedIcon />} onClick={handleAddLead}>
+      <Button variant="outlined" startIcon={<AddOutlinedIcon />} onClick={handleAddLead} className={classes.button}>
         Add Lead
       </Button>
-    <MaterialTable
-    icons={tableIcons}
-      title="Leads Data"
-      columns={[
-        { title: 'Customer Name', field: 'customerName' },
-        { title: 'Bank', field: 'loanBank'},
-        { title: 'Product Type', field: 'productType' },
-        { title: 'Application Status', field: 'loanStatus' },
-        { title: 'Disbursement Date', field: 'disbursementDate' },
-        { title: 'Disbursement Amount', field: 'disbursementAmount', type: 'numeric' },
-        { title: 'Customer Number', field: 'customerPhone', type: 'numeric' },
-        { title: 'Location', field: 'location'},
-        { title: 'State', field: 'loanState'},
-        { title: 'Application Number', field: 'applicationNumber' },
-        { title: 'Pay Out Type', field: 'payOutType', type: 'numeric' },
-        { title: 'Connector Payout Amount', field: 'connectorPayoutAmount'},
-        { title: 'APPLICATION DATE', field: 'applicationdate' },        
-      ]}
-      data={[
-        { addLead},
-        { name: 'NERUGATTI CHARAN KUMAR', producttype: 'Personal Loan', loanamount: 1500000, loanstatus: 'Rejected',  redeemstatus: 'Redeemed', applicationnumber: 'IC76501384(S)', applicationdate: '20-03-2021 04:00 PM'},  
-      ]}
-      actions={[
-        {
-          icon: SaveIcon,
-          tooltip: 'Save User',
-          onClick: (event, rowData) => alert("You saved " + rowData.name)
+     
+      <div>
+      <MaterialTable
+        icons={tableIcons}
+        title="Leads Data"
+        columns={[
+          { title: 'Customer Name', field: 'customerName' },
+          { title: 'Bank', field: 'loanBank' },
+          { title: 'Product Type', field: 'productType' },
+          { title: 'Application Status', field: 'loanStatus' },
+          { title: 'Disbursement Date', field: 'disbursementDate' },
+          { title: 'Disbursement Amount', field: 'disbursementAmount', type: 'numeric' },
+          { title: 'Customer Number', field: 'customerPhone', type: 'numeric' },
+          { title: 'Location', field: 'location' },
+          { title: 'State', field: 'loanState' },
+          { title: 'Application Number', field: 'applicationNumber' },
+          { title: 'Pay Out Type', field: 'payOutType', type: 'numeric' },
+          { title: 'Connector Payout Amount', field: 'connectorPayoutAmount' },
+          { title: 'APPLICATION DATE', field: 'applicationdate' },
+        ]}
+        data={[
+          { addLead },
+          { name: 'NERUGATTI CHARAN KUMAR', producttype: 'Personal Loan', loanamount: 1500000, loanstatus: 'Rejected', redeemstatus: 'Redeemed', applicationnumber: 'IC76501384(S)', applicationdate: '20-03-2021 04:00 PM' },
+        ]}
+        actions={[
+          {
+            icon: SaveIcon,
+            tooltip: 'Save User',
+            onClick: (event, rowData) => alert("You saved " + rowData.name)
 
-        },
-        rowData => ({
-          icon: DeleteIcon,
-          tooltip: 'Delete User',
-          onClick: (event, rowData) => window.confirm("You want to delete " + rowData.name),
-          disabled: rowData.birthYear < 2000
-        })
-      ]}
-      options={{
-        actionsColumnIndex: -1
-      }}
-    />
-    {addLeadElement}
+          },
+          rowData => ({
+            icon: DeleteIcon,
+            tooltip: 'Delete User',
+            onClick: (event, rowData) => window.confirm("You want to delete " + rowData.name),
+            disabled: rowData.birthYear < 2000
+          })
+        ]}
+        options={{
+          actionsColumnIndex: -1
+        }}
+      />
+      {addLeadElement}
+      </div>
+     
     </div>
   )
 }
