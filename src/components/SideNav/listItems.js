@@ -35,7 +35,7 @@ const MainListItems = () => {
           <ListItemIcon
             sx={
               pathname === "/dashboard" || pathname === "/"
-                ? ""
+                ? {}
                 : { color: "white" }
             }
           >
@@ -47,7 +47,7 @@ const MainListItems = () => {
 
       <ListItem>
         <ListItemButton sx={pathname === "/leads" ? active : nonActive}>
-          <ListItemIcon sx={pathname === "/leads" ? "" : { color: "white" }}>
+          <ListItemIcon sx={pathname === "/leads" ? {} : { color: "white" }}>
             <PersonOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="Leads" />
@@ -57,7 +57,7 @@ const MainListItems = () => {
       <ListItem>
         <ListItemButton sx={pathname === "/loan-enquiry" ? active : nonActive}>
           <ListItemIcon
-            sx={pathname === "/loan-enquiry" ? "" : { color: "white" }}
+            sx={pathname === "/loan-enquiry" ? {} : { color: "white" }}
           >
             <FactCheckOutlinedIcon />
           </ListItemIcon>
@@ -67,7 +67,7 @@ const MainListItems = () => {
 
       <ListItem>
         <ListItemButton sx={pathname === "/settings" ? active : nonActive}>
-          <ListItemIcon sx={pathname === "/settings" ? "" : { color: "white" }}>
+          <ListItemIcon sx={pathname === "/settings" ? {} : { color: "white" }}>
             <SettingsOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary="Settings" />
