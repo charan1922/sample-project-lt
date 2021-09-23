@@ -9,11 +9,9 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { mainListItems } from "./listItems";
+import MainListItems from "./listItems";
 import AppContext from "../contextProvider/AppContextProvider/AppContext";
 import Logo from "./Logo.png";
-
-// import Chart from './Chart';
 
 const drawerWidth = 240;
 
@@ -50,10 +48,9 @@ function SideNav() {
 
   return (
     <>
-    
-    <Drawer variant="permanent" open={open}>
-    <img src={Logo} alt="logo" style={{padding:'20px'}} />
-      {/* <Toolbar
+      <Drawer variant="permanent" open={open}>
+        <img src={Logo} alt="logo" style={{ padding: "20px" }} />
+        {/* <Toolbar
         sx={{
           display: "flex",
           alignItems: "center",
@@ -65,12 +62,11 @@ function SideNav() {
           <ChevronLeftIcon />
         </IconButton>
       </Toolbar> */}
-      
-      
-      <List>{mainListItems}</List>
-      <Divider />
-      {/* <List>{secondaryListItems}</List> */}
-    </Drawer>
+
+        <List>{MainListItems()}</List>
+        <Divider />
+        {/* <List>{secondaryListItems}</List> */}
+      </Drawer>
     </>
   );
 }
