@@ -9,6 +9,8 @@
     "@mui/icons-material": "^5.0.0",
     "@mui/material": "^5.0.0",
     "@mui/styles": "^5.0.0",
+    "@mui/x-data-grid-generator": "next",
+    "@mui/x-data-grid": "next",
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
