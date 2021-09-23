@@ -5,7 +5,7 @@ import {
   Route,
   Link,
   Redirect,
-  NavLink
+  NavLink,
 } from "react-router-dom";
 import Login from "./features/login/Login";
 import AuthButton from "./components/AuthButton";
@@ -28,11 +28,9 @@ export default function App() {
 
   let auth = useAuth();
 
-  // if (auth == undefined || auth.user == undefined || auth.user == null)
-  //   return (
-  //     <Login></Login>
-  //   );
-  // else
+  if (auth == undefined || auth.user == undefined || auth.user == null)
+    return <Login></Login>;
+  else
     return (
       <AppWrapper>
         <ProvideAuth>
@@ -51,7 +49,6 @@ export default function App() {
       </AppWrapper>
     );
 }
-
 
 function PrivateRoute({ children, ...rest }) {
   let auth = useAuth();

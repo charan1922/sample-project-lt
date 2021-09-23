@@ -1,50 +1,52 @@
 import React, { useCallback, useMemo } from "react";
-import {
-    useHistory,
-    useLocation
-} from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import useAuth from "../../utils/useAuth";
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 
 function Copyright(props) {
-    return (
-      <Typography variant="body2" color="text.secondary" align="center" {...props}>
-        {'Copyright © Digi Loans'}
-        {' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
-  
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © Digi Loans"} {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
+
 const theme = createTheme();
 
-const useYupValidationResolver = validationSchema =>
+const useYupValidationResolver = (validationSchema) =>
   useCallback(
-    async data => {
+    async (data) => {
       try {
         const values = await validationSchema.validate(data, {
-          abortEarly: false
+          abortEarly: false,
         });
 
         return {
           values,
-          errors: {}
+          errors: {},
         };
       } catch (errors) {
         return {
@@ -54,43 +56,48 @@ const useYupValidationResolver = validationSchema =>
               ...allErrors,
               [currentError.path]: {
                 type: currentError.type ?? "validation",
-                message: currentError.message
-              }
+                message: currentError.message,
+              },
             }),
             {}
-          )
+          ),
         };
       }
     },
     [validationSchema]
   );
-  
+
 const validationSchema = yup.object({
   email: yup.string().email().required(),
   password: yup.string().min(8).max(32).required(),
 });
 
 export default function LoginPage() {
-    let history = useHistory();
-    let location = useLocation();
-    let auth = useAuth();
-   
-    const resolver = useYupValidationResolver(validationSchema);
-    const { handleSubmit, register, formState: { errors }, reset } = useForm({ resolver });      
+  let history = useHistory();
+  let location = useLocation();
+  let auth = useAuth();
 
-    const onSubmitHandler = (data) => {
-      console.log({ data });
-      reset();
-      auth.signin(() => {
-        history.replace(from);
+  const resolver = useYupValidationResolver(validationSchema);
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+  } = useForm({ resolver });
+
+  const onSubmitHandler = (data) => {
+    console.log({ data });
+    reset();
+    auth.signin(() => {
+      history.replace(from);
     });
-  }
+  };
 
-    let { from } = location.state || { from: { pathname: "/" } };   
-    
-    return (
-      <ThemeProvider theme={theme}>
-     <Grid container component="main" sx={{ height: '100vh' }}>
+  let { from } = location.state || { from: { pathname: "/" } };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
           item
@@ -98,31 +105,50 @@ export default function LoginPage() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random)',
-            backgroundRepeat: 'no-repeat',
+            // backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
-        />
+        >
+          <Carousel showThumbs={false} dynamicHeight={false}>
+            <div>
+              <img src="https://source.unsplash.com/random" />
+              {/* <p className="legend">Legend 1</p> */}
+            </div>
+            <div>
+              <img src="https://source.unsplash.com/random" />
+              {/* <p className="legend">Legend 2</p> */}
+            </div>
+          </Carousel>
+        </Grid>
+
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
               my: 8,
               mx: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
-            </Avatar>
+            </Avatar> */}
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit(onSubmitHandler)} sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit(onSubmitHandler)}
+              sx={{ mt: 1 }}
+            >
               <TextField
                 margin="normal"
                 required
@@ -177,5 +203,5 @@ export default function LoginPage() {
         </Grid>
       </Grid>
     </ThemeProvider>
-    );
+  );
 }
