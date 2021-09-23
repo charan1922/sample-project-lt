@@ -294,6 +294,7 @@ function Leads() {
                 className={classes.textField}
                 autoFocus
                 margin="dense"
+                type="number"
                 {...register("loanAmount")}
                 label="Loan Amount"
                 fullWidth
