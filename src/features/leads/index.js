@@ -31,8 +31,8 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import { makeStyles } from '@mui/styles';
-// import { DataGrid } from '@mui/x-data-grid';
-// import { useDemoData } from '@mui/x-data-grid-generator';
+import { DataGrid } from '@mui/x-data-grid';
+import { useDemoData } from '@mui/x-data-grid-generator';
 
 import * as yup from "yup";
 
@@ -96,25 +96,13 @@ const useStyles = makeStyles(theme => ({
  
 }));
 
-const tableIcons = {
-  Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
-  Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
-  Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-  Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-  DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-  Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
-  Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-  Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
-  FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-  LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-  NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-  PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
-  ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-  Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-  SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
-  ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-  ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
-};
+function loadServerRows(page, data) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(data.rows.slice(page * 5, (page + 1) * 5));
+    }, Math.random() * 500 + 100); // simulate network latency
+  });
+}
 
 
 function Leads() {
@@ -122,6 +110,37 @@ function Leads() {
   const classes = useStyles();
 
   const dispatch = useDispatch(); // used to dispatch an action
+
+
+  const [page, setPage] = React.useState(0);
+  const [rows, setRows] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+
+  const { data } = useDemoData({
+    dataSet: 'Commodity',
+    rowLength: 100,
+    maxColumns: 6,
+  });
+
+  React.useEffect(() => {
+    let active = true;
+
+    (async () => {
+      setLoading(true);
+      const newRows = await loadServerRows(page, data);
+
+      if (!active) {
+        return;
+      }
+
+      setRows(newRows);
+      setLoading(false);
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [page, data]);
 
   const { leadsData, isLoading, successMsg, errorMsg } = useSelector(
     ({ leadsDataService }) => leadsDataService
@@ -377,6 +396,22 @@ function Leads() {
     </form>
   </Dialog>
 
+const columns=[
+  { headerName: 'Customer Name', field: 'customerName', width: 150 },
+  { headerName: 'Bank', field: 'loanBank' , width: 120},
+  { headerName: 'Product Type', field: 'productType', width: 150 },
+  { headerName: 'Application Status', field: 'loanStatus', width: 150 },
+  { headerName: 'Disbursement Date', field: 'disbursementDate', width: 150 },
+  { headerName: 'Disbursement Amount', field: 'disbursementAmount', type: 'numeric', width: 150 },
+  { headerName: 'Customer Number', field: 'customerPhone', type: 'numeric', width: 150 },
+  { headerName: 'Location', field: 'location', width: 150 },
+  { headerName: 'State', field: 'loanState', width: 150 },
+  { headerName: 'Application Number', field: 'applicationNumber', width: 150 },
+  { headerName: 'Pay Out Type', field: 'payOutType', type: 'numeric', width: 150 },
+  { headerName: 'Connector Payout Amount', field: 'connectorPayoutAmount', width: 150 },
+  { headerName: 'APPLICATION DATE', field: 'applicationdate', width: 150 },
+]
+
   return (
     <div className="sidenav-content">
       
@@ -389,7 +424,19 @@ function Leads() {
       <Button variant="outlined" startIcon={<AddOutlinedIcon />} onClick={handleAddLead} className={classes.button}>
         Add Lead
       </Button>
-   
+      <div style={{ height: 400, width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pagination
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        rowCount={100}
+        paginationMode="server"
+        onPageChange={(newPage) => setPage(newPage)}
+        loading={loading}
+      />
+    </div>
      
 
       {addLeadElement}
