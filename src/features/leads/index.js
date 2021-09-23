@@ -1,10 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import MaterialTable from "material-table";
 import { forwardRef } from 'react';
-import DeleteIcon from '@mui/icons-material/Delete';
-import SaveIcon from '@mui/icons-material/Save';
 import AddBox from '@mui/icons-material/AddBox';
 import ArrowDownward from '@mui/icons-material/ArrowDownward';
 import Check from '@mui/icons-material/Check';
@@ -34,6 +31,9 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import { makeStyles } from '@mui/styles';
+// import { DataGrid } from '@mui/x-data-grid';
+// import { useDemoData } from '@mui/x-data-grid-generator';
+
 import * as yup from "yup";
 
 const useYupValidationResolver = validationSchema =>
@@ -78,8 +78,6 @@ const validationSchema = yup.object({
   loanState: yup.string().required(),
   applicationNumber: yup.string().required(),
   payOutType: yup.string().required(),
-  // customerName: yup.string().required(),
-  // customerName: yup.string().required()
 });
 
 const useStyles = makeStyles(theme => ({
@@ -129,42 +127,45 @@ function Leads() {
     ({ leadsDataService }) => leadsDataService
   );
 
-  const states = ["Andhra Pradesh",
-    "Arunachal Pradesh",
-    "Assam",
-    "Bihar",
-    "Chhattisgarh",
-    "Goa",
-    "Gujarat",
-    "Haryana",
-    "Himachal Pradesh",
-    "Jammu and Kashmir",
-    "Jharkhand",
-    "Karnataka",
-    "Kerala",
-    "Madhya Pradesh",
-    "Maharashtra",
-    "Manipur",
-    "Meghalaya",
-    "Mizoram",
-    "Nagaland",
-    "Odisha",
-    "Punjab",
-    "Rajasthan",
-    "Sikkim",
-    "Tamil Nadu",
-    "Telangana",
-    "Tripura",
-    "Uttarakhand",
-    "Uttar Pradesh",
-    "West Bengal",
-    "Andaman and Nicobar Islands",
-    "Chandigarh",
-    "Dadra and Nagar Haveli",
-    "Daman and Diu",
-    "Delhi",
-    "Lakshadweep",
-    "Puducherry"]
+  const states = {
+    "AN":"Andaman and Nicobar Islands",
+    "AP":"Andhra Pradesh",
+    "AR":"Arunachal Pradesh",
+    "AS":"Assam",
+    "BR":"Bihar",
+    "CG":"Chandigarh",
+    "CH":"Chhattisgarh",
+    "DN":"Dadra and Nagar Haveli",
+    "DD":"Daman and Diu",
+    "DL":"Delhi",
+    "GA":"Goa",
+    "GJ":"Gujarat",
+    "HR":"Haryana",
+    "HP":"Himachal Pradesh",
+    "JK":"Jammu and Kashmir",
+    "JH":"Jharkhand",
+    "KA":"Karnataka",
+    "KL":"Kerala",
+    "LA":"Ladakh",
+    "LD":"Lakshadweep",
+    "MP":"Madhya Pradesh",
+    "MH":"Maharashtra",
+    "MN":"Manipur",
+    "ML":"Meghalaya",
+    "MZ":"Mizoram",
+    "NL":"Nagaland",
+    "OR":"Odisha",
+    "PY":"Puducherry",
+    "PB":"Punjab",
+    "RJ":"Rajasthan",
+    "SK":"Sikkim",
+    "TN":"Tamil Nadu",
+    "TS":"Telangana",
+    "TR":"Tripura",
+    "UP":"Uttar Pradesh",
+    "UK":"Uttarakhand",
+    "WB":"West Bengal"
+}
 
 
   const resolver = useYupValidationResolver(validationSchema);
@@ -321,7 +322,7 @@ function Leads() {
                 {...register("loanState")}
                 fullWidth
               >
-                {states.map((x) => <MenuItem value={x}>{x}</MenuItem>)}
+                {Object.keys(states).map((x) => <MenuItem value={x}>{states[x]}</MenuItem>)}
               </Select>
               <p style={{ color: 'red', fontSize: 9 }}>{errors.loanState?.message}</p>
             </FormControl>
@@ -369,8 +370,8 @@ function Leads() {
 
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} >Cancel</Button>
-        <Button  type="submit" onClick={addAPI}>Add Lead</Button>
+        <Button variant="outlined" onClick={handleClose} >Cancel</Button>
+        <Button variant="outlined" type="submit" onClick={addAPI}>Add</Button>
       
       </DialogActions>
     </form>
@@ -388,50 +389,9 @@ function Leads() {
       <Button variant="outlined" startIcon={<AddOutlinedIcon />} onClick={handleAddLead} className={classes.button}>
         Add Lead
       </Button>
-      </div>
    
      
-      <div>
-      <MaterialTable
-        icons={tableIcons}
-        title="Leads Data"
-        columns={[
-          { title: 'Customer Name', field: 'customerName' },
-          { title: 'Bank', field: 'loanBank' },
-          { title: 'Product Type', field: 'productType' },
-          { title: 'Application Status', field: 'loanStatus' },
-          { title: 'Disbursement Date', field: 'disbursementDate' },
-          { title: 'Disbursement Amount', field: 'disbursementAmount', type: 'numeric' },
-          { title: 'Customer Number', field: 'customerPhone', type: 'numeric' },
-          { title: 'Location', field: 'location' },
-          { title: 'State', field: 'loanState' },
-          { title: 'Application Number', field: 'applicationNumber' },
-          { title: 'Pay Out Type', field: 'payOutType', type: 'numeric' },
-          { title: 'Connector Payout Amount', field: 'connectorPayoutAmount' },
-          { title: 'APPLICATION DATE', field: 'applicationdate' },
-        ]}
-        data={[
-          { addLead },
-          { name: 'NERUGATTI CHARAN KUMAR', producttype: 'Personal Loan', loanamount: 1500000, loanstatus: 'Rejected', redeemstatus: 'Redeemed', applicationnumber: 'IC76501384(S)', applicationdate: '20-03-2021 04:00 PM' },
-        ]}
-        actions={[
-          {
-            icon: SaveIcon,
-            tooltip: 'Save User',
-            onClick: (event, rowData) => alert("You saved " + rowData.name)
 
-          },
-          rowData => ({
-            icon: DeleteIcon,
-            tooltip: 'Delete User',
-            onClick: (event, rowData) => window.confirm("You want to delete " + rowData.name),
-            disabled: rowData.birthYear < 2000
-          })
-        ]}
-        options={{
-          actionsColumnIndex: -1
-        }}
-      />
       {addLeadElement}
       </div>
      
